@@ -3,9 +3,9 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 
-import Landing from "./Pages/Landing";
-import Shop from "./Pages/Shop";
-import Cart from "./Pages/Cart";
+import Landing from "./pages/Landing";
+import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
 const App=()=>(
     <>
     
