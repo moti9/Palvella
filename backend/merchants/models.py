@@ -33,7 +33,10 @@ class Business(models.Model):
     name = models.CharField(max_length=255, default="")
     category = models.CharField(max_length=50, choices=BusinessCategory.choices, default=BusinessCategory.SHOP)
     contact_number = models.CharField(max_length=15, default="")
+    alt_contact_number = models.CharField(max_length=15, default="")
     email = models.EmailField(max_length=100, default="")
+    alt_email = models.EmailField(max_length=100, default="")
+    gstin = models.CharField(max_length=50, default="")
     description = models.TextField(max_length=1000, default="")
     service_available_at = models.ManyToManyField(PostalCode)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,7 +65,7 @@ class BusinessAddress(models.Model):
 class BusinessImage(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     business = models.ForeignKey(Business, on_delete=models.CASCADE, default=None)
-    image = models.ImageField(upload_to="business_images/", validators=[FileExtensionValidator(['jpg', 'jpeg', 'png']),MaxValueValidator(1 * 1024* 1024), validate_image_dimensions])
+    image = models.ImageField(upload_to="business_images/", validators=[FileExtensionValidator(['jpg', 'jpeg', 'png']), validate_image_dimensions])
     
     def __str__(self):
         return f"{self.business.name} Image"
@@ -71,7 +74,7 @@ class BusinessImage(models.Model):
 class BusinessDocument(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     business = models.ForeignKey(Business, on_delete=models.CASCADE, default=None)
-    document = models.FileField(upload_to="business_documents/", validators=[FileExtensionValidator(['pdf', 'doc', 'docx']), MaxValueValidator(2 * 1024 * 1024)])  # 10MB limit
+    document = models.FileField(upload_to="business_documents/", validators=[FileExtensionValidator(['pdf', 'doc', 'docx'])])  # 2MB limit
     
     def __str__(self):
         return f"{self.business.name} Document"
@@ -79,7 +82,8 @@ class BusinessDocument(models.Model):
 
 class OwnerDocument(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    document = models.FileField(upload_to="owner_documents/", validators=[FileExtensionValidator(['pdf', 'doc', 'docx']), MaxValueValidator(2 * 1024 * 1024)])  # 10MB limit
+    business = models.ForeignKey(Business, on_delete=models.CASCADE, default=None)
+    document = models.FileField(upload_to="owner_documents/", validators=[FileExtensionValidator(['pdf', 'doc', 'docx'])])  # 2MB limit
     
     def __str__(self):
         return f"{self.owner.username} Document"
@@ -118,6 +122,7 @@ class ProductVariation(models.Model):
         MEDIUM = 'medium', 'Medium'
         SMALL = 'small', 'Small'
         HALF = 'half', 'Half'
+        FULL = 'full', 'Full'
         OTHER = 'other', 'Other'
 
     # product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -131,12 +136,15 @@ class ProductVariation(models.Model):
         verbose_name_plural = "Product variations"
         # unique_together = ['product', 'size', 'size_unit']
 
+    def __str__(self) -> str:
+        return f"{self.size_unit}-{self.size}-{self.price}"
+
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, default="")
     product_code = models.CharField(max_length=25, default="", blank=True, null=True)
-    product_variant = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
+    product_variant = models.ManyToManyField(ProductVariation)
     description = models.TextField(default="")
     meta_data = models.TextField(default="", null=True, blank=True)
     is_available = models.BooleanField(default=True)
@@ -144,11 +152,13 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     # class Meta:
     #     abstract = True
+    def __str__(self):
+        return f"{self.name}-{self.business.name}"
 
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=None)
-    image = models.ImageField(upload_to="product_images/", validators=[FileExtensionValidator(['jpg', 'jpeg', 'png']),MaxValueValidator(2 * 1024* 1024), validate_image_dimensions])
+    image = models.ImageField(upload_to="product_images/", validators=[FileExtensionValidator(['jpg', 'jpeg', 'png']), validate_image_dimensions])
     
     def __str__(self):
         return f"{self.product.name} Image"
