@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../slices/authSlice';
+import { loginUser } from '../slices/authSlice';
 import AlertMessage from '../components/AlertMessage';
+import PropTypes from 'prop-types'; // Import PropTypes
 
 const UserLogin = ({ closeModal, signupModal }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const UserLogin = ({ closeModal, signupModal }) => {
     };
 
     try {
-      dispatch(login(user));
+      dispatch(loginUser(user));
       setAlertMessage({ type: "success", message: "Welcome back dear user!!" });
       setUsername('');
       setPassword('');
@@ -37,7 +38,7 @@ const UserLogin = ({ closeModal, signupModal }) => {
   }
 
   return (
-    <div className="modal bg-dark" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: "block" }}>
+    <div className="modal bg-light" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: "block" }}>
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           {alertMessage && <AlertMessage type={alertMessage.type} message={alertMessage.message} setAlertMessage={setAlertMessage} />}
@@ -92,6 +93,11 @@ const UserLogin = ({ closeModal, signupModal }) => {
       </div>
     </div>
   );
+};
+
+UserLogin.propTypes = {
+  closeModal: PropTypes.func.isRequired, // Function to close the modal
+  signupModal: PropTypes.func.isRequired // Function to open signup modal
 };
 
 export default UserLogin;

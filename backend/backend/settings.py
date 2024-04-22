@@ -42,7 +42,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
+    # 'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -152,7 +152,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-ASGI_APPLICATION = 'backend.asgi.application'
+AUTH_USER_MODEL = "accounts.User"
+
+# OPENAI_API_KEY=env('OPENAI_API_KEY')
+GEMINI_API_KEY=env('GEMINI_API_KEY')
+
+# ASGI_APPLICATION = 'backend.asgi.application'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

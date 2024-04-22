@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 
 const AlertMessage = ({ type, message, setAlertMessage }) => {
     const [isVisible, setIsVisible] = useState(true);
@@ -47,5 +48,11 @@ const AlertMessage = ({ type, message, setAlertMessage }) => {
         </div>
     );
 };
+
+AlertMessage.propTypes = {
+    type: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    setAlertMessage: PropTypes.func.isRequired
+}
 
 export default AlertMessage;

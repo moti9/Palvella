@@ -1,0 +1,124 @@
+{
+    "Categories": [
+        {
+            "id": 1,
+            "name": "clothing",
+            "display_name": "Clothing"
+        },
+        {
+            "id": 2,
+            "name": "fruit_vegetable",
+            "display_name": "Fruit & Vegetable"
+        },
+        {
+            "id": 3,
+            "name": "dairy",
+            "display_name": "Dairy"
+        },
+        {
+            "id": 4,
+            "name": "gadgets",
+            "display_name": "Gadgets"
+        },
+        {
+            "id": 5,
+            "name": "garage",
+            "display_name": "Garage"
+        },
+        {
+            "id": 6,
+            "name": "restaurant",
+            "display_name": "Restaurant"
+        },
+        {
+            "id": 7,
+            "name": "sweet_bakery",
+            "display_name": "Sweet & Bakery"
+        },
+        {
+            "id": 8,
+            "name": "medical",
+            "display_name": "Medical Store"
+        },
+        {
+            "id": 9,
+            "name": "grocery",
+            "display_name": "Grocery Store"
+        },
+        {
+            "id": 10,
+            "name": "beauty",
+            "display_name": "Beauty Products"
+        },
+        {
+            "id": 11,
+            "name": "electronics",
+            "display_name": "Electronics"
+        },
+        {
+            "id": 12,
+            "name": "books",
+            "display_name": "Books"
+        },
+        {
+            "id": 13,
+            "name": "toys",
+            "display_name": "Toys"
+        },
+        {
+            "id": 14,
+            "name": "sports",
+            "display_name": "Sports & Outdoors"
+        },
+        {
+            "id": 15,
+            "name": "pet_supplies",
+            "display_name": "Pet Supplies"
+        },
+        {
+            "id": 16,
+            "name": "home_decoration",
+            "display_name": "Home Decoration"
+        },
+        {
+            "id": 17,
+            "name": "jewellery",
+            "display_name": "Jewellery"
+        },
+        {
+            "id": 18,
+            "name": "health_fitness",
+            "display_name": "Health & Fitness"
+        },
+        {
+            "id": 19,
+            "name": "music",
+            "display_name": "Music"
+        },
+        {
+            "id": 20,
+            "name": "video_games",
+            "display_name": "Video Games"
+        },
+        {
+            "id": 21,
+            "name": "furniture",
+            "display_name": "Furniture"
+        },
+        {
+            "id": 22,
+            "name": "office_supplies",
+            "display_name": "Office Supplies"
+        },
+        {
+            "id": 23,
+            "name": "automotive",
+            "display_name": "Automotive"
+        },
+        {
+            "id": 24,
+            "name": "other",
+            "display_name": "Other"
+        }
+    ]
+}

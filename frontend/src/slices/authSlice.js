@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import AuthAPI from "../services/AuthAPI";
+import BusinessAPI from "../services/BusinessAPI";
 import configStore from "../app/configStore";
 
 
-const storedData = JSON.parse(localStorage.getItem('auth')) || {
-    user: {
-        id: null,
-        username: null,
-        first_name: null,
-        last_name: null,
-        image: null,
-    },
+const storedData = JSON.parse(localStorage.getItem('palvella')) || {
+    id: null,
+    username: null,
+    firstName: null,
+    lastName: null,
+    image: null,
+    role: null,
     isAuthenticated: false,
     isAccessToken: false,
     isRefreshToken: false
@@ -21,6 +21,7 @@ const refresh_token = cookie.get("refresh_token");
 
 if (!access_token || !refresh_token) {
     storedData.isAuthenticated = false;
+    localStorage.removeItem('palvella');
 }
 
 if (access_token) {
@@ -36,22 +37,27 @@ const initialState = {
 };
 
 export const authSlice = createSlice({
-    name: 'auth',
+    name: 'palvella',
     initialState,
     reducers: {
         loginSuccess: (state, action) => {
+            state.id = action.payload.id;
+            state.firstName = action.payload.first_name;
+            state.lastName = action.payload.last_name;
+            state.username = action.payload.username;
+            state.role = action.payload.role;
             state.isAuthenticated = true;
             cookie.set("access_token", action.payload.access_token);
             cookie.set("refresh_token", action.payload.refresh_token);
-            localStorage.setItem("auth", JSON.stringify(state));
+            localStorage.setItem("palvella", JSON.stringify(state));
         },
-        loginFailure: (state, action) => {
+        loginFailure: (state) => {
             state.isAuthenticated = false;
             // Clear tokens from cookies
             cookie.remove('refresh_token');
             cookie.remove('access_token');
             // Clear state from local storage
-            localStorage.removeItem('auth');
+            localStorage.removeItem('palvella');
         },
         logout: (state) => {
             state.isAuthenticated = false;
@@ -59,20 +65,20 @@ export const authSlice = createSlice({
             cookie.remove('refresh_token');
             cookie.remove('access_token');
             // Clear state from local storage
-            localStorage.removeItem('auth');
+            localStorage.removeItem('palvella');
         },
         refreshAccessTokenSuccess: (state, action) => {
             cookie.set('access_token', action.payload.access);
             // Save state to local storage
-            localStorage.setItem('auth', JSON.stringify(state));
+            localStorage.setItem('palvella', JSON.stringify(state));
         },
-        refreshAccessTokenFailure: (state, action) => {
+        refreshAccessTokenFailure: (state) => {
             state.isAuthenticated = false;
             // Clear tokens from cookies
             cookie.remove('refresh_token');
             cookie.remove('access_token');
             // Clear state from local storage
-            localStorage.removeItem('auth');
+            localStorage.removeItem('palvella');
         },
     }
 });
@@ -81,7 +87,7 @@ export const { loginSuccess, loginFailure, logout, refreshAccessTokenSuccess, re
 
 export default authSlice.reducer;
 
-export const login = (userData) => async (dispatch) => {
+export const loginUser = (userData) => async (dispatch) => {
     try {
         const response = await AuthAPI.LoginUser(userData);
         // console.log(response);
@@ -89,6 +95,7 @@ export const login = (userData) => async (dispatch) => {
     } catch (error) {
         // console.log(error);
         dispatch(loginFailure(error.message));
+        throw error;
     }
 };
 
@@ -98,6 +105,29 @@ export const logoutUser = () => async (dispatch) => {
         dispatch(logout());
     } catch (error) {
         console.error(error);
+        throw error;
+    }
+};
+
+export const loginBusiness = (userData) => async (dispatch) => {
+    try {
+        const response = await BusinessAPI.loginBusiness(userData);
+        // console.log(response);
+        dispatch(loginSuccess(response));
+    } catch (error) {
+        // console.log(error);
+        dispatch(loginFailure(error.message));
+        throw error;
+    }
+};
+
+export const logoutBusiness = () => async (dispatch) => {
+    try {
+        await BusinessAPI.logoutBusiness();
+        dispatch(logout());
+    } catch (error) {
+        console.error(error);
+        throw error;
     }
 };
 
@@ -107,5 +137,6 @@ export const refreshAccessToken = () => async (dispatch) => {
         dispatch(refreshAccessTokenSuccess(response.data));
     } catch (error) {
         dispatch(refreshAccessTokenFailure(error.message));
+        throw error;
     }
 };

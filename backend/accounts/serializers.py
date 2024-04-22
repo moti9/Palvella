@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
+from .models import User
 from django.contrib.auth import authenticate
 
 
@@ -7,14 +7,15 @@ class UserSignupSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(max_length=50, required=True)
     last_name = serializers.CharField(max_length=50, required=True)
     email = serializers.EmailField(max_length=50,required=True)
+    contact_number = serializers.CharField(max_length=15,required=True)
     password = serializers.CharField(
-        max_length=50,
+        max_length=128,
         write_only=True,
         required=True,
         style={'input_type': 'password'},
     )
     confirm_password = serializers.CharField(
-        max_length=50,
+        max_length=128,
         write_only=True,
         required=True,
         style={'input_type': 'password'},
@@ -22,7 +23,7 @@ class UserSignupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "username", "email", "password", "confirm_password"]
+        fields = ["first_name", "last_name", "username", "email", "contact_number", "password", "confirm_password"]
         extra_kwargs={
             "password": {
                 "write_only": True,
@@ -48,16 +49,16 @@ class UserSignupSerializer(serializers.ModelSerializer):
     
 
 class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=150, required=True)
-    password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+    email = serializers.EmailField(max_length=50, required=True)
+    password = serializers.CharField(max_length=128, write_only=True, required=True, style={'input_type': 'password'})
 
     def validate(self, data):
-        username = data.get('username')
+        email = data.get('email')
         password = data.get('password')
 
-        user = authenticate(username=username, password=password)
+        user = authenticate(email=email, password=password)
 
-        if user and user.is_active:
+        if user and user.is_active and user.role == "user":
             data['user'] = user
         else:
             raise serializers.ValidationError('Unable to log in with provided credentials')

@@ -3,6 +3,6 @@ import authReducer from "../slices/authSlice";
 
 export default configureStore({
     reducer: {
-        'auth': authReducer,
+        'palvella': authReducer,
     }
 });

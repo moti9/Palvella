@@ -1,0 +1,154 @@
+{
+    "Allergens": [
+        {
+            "id": 1,
+            "name": "na",
+            "display_name": "Not Available"
+        },
+        {
+            "id": 2,
+            "name": "other",
+            "display_name": "Other"
+        },
+        {
+            "id": 3,
+            "name": "alcohol",
+            "display_name": "Alcohol"
+        },
+        {
+            "id": 4,
+            "name": "tea",
+            "display_name": "Tea"
+        },
+        {
+            "id": 5,
+            "name": "coffee",
+            "display_name": "Coffee"
+        },
+        {
+            "id": 6,
+            "name": "chocolate",
+            "display_name": "Chocolate"
+        },
+        {
+            "id": 7,
+            "name": "citrus_fruits",
+            "display_name": "Citrus Fruits"
+        },
+        {
+            "id": 8,
+            "name": "tomatoes",
+            "display_name": "Tomatoes"
+        },
+        {
+            "id": 9,
+            "name": "garlic",
+            "display_name": "Garlic"
+        },
+        {
+            "id": 10,
+            "name": "onions",
+            "display_name": "Onions"
+        },
+        {
+            "id": 11,
+            "name": "lactose",
+            "display_name": "Lactose"
+        },
+        {
+            "id": 12,
+            "name": "yeast",
+            "display_name": "Yeast"
+        },
+        {
+            "id": 13,
+            "name": "corn",
+            "display_name": "Corn"
+        },
+        {
+            "id": 14,
+            "name": "wheat",
+            "display_name": "Wheat"
+        },
+        {
+            "id": 15,
+            "name": "poultry",
+            "display_name": "Poultry"
+        },
+        {
+            "id": 16,
+            "name": "meat",
+            "display_name": "Meat"
+        },
+        {
+            "id": 17,
+            "name": "sulfites",
+            "display_name": "Sulfites"
+        },
+        {
+            "id": 18,
+            "name": "molluscs",
+            "display_name": "Molluscs"
+        },
+        {
+            "id": 19,
+            "name": "lupin",
+            "display_name": "Lupin"
+        },
+        {
+            "id": 20,
+            "name": "celery",
+            "display_name": "Celery"
+        },
+        {
+            "id": 21,
+            "name": "mustard",
+            "display_name": "Mustard"
+        },
+        {
+            "id": 22,
+            "name": "sesame",
+            "display_name": "Sesame"
+        },
+        {
+            "id": 23,
+            "name": "shellfish",
+            "display_name": "Shellfish"
+        },
+        {
+            "id": 24,
+            "name": "fish",
+            "display_name": "Fish"
+        },
+        {
+            "id": 25,
+            "name": "tree_nuts",
+            "display_name": "Tree Nuts"
+        },
+        {
+            "id": 26,
+            "name": "peanuts",
+            "display_name": "Peanuts"
+        },
+        {
+            "id": 27,
+            "name": "soy",
+            "display_name": "Soy"
+        },
+        {
+            "id": 28,
+            "name": "eggs",
+            "display_name": "Eggs"
+        },
+        {
+            "id": 29,
+            "name": "dairy",
+            "display_name": "Dairy"
+        },
+        {
+            "id": 30,
+            "name": "gluten",
+            "display_name": "Gluten"
+        }
+    ]
+}

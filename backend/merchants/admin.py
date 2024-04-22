@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import (Business, BusinessAddress, BusinessImage, BusinessDocument, OwnerDocument, Allergen,
-                     Ingredient, Cuisine, ProductVariation, ProductImage, Category, ShopProduct,
-                     RestaurantProduct, BusinessReview, ProductReview, PostalCode)
+from .models import (Business, BusinessAddress, BusinessLogo, BusinessImage, BusinessDocument, OwnerDocument, Allergen,
+        Cuisine, ProductVariation, ProductImage, ProductCategory, ProductBrand ,ShopProduct, RestaurantProduct, BusinessReview, 
+        ProductReview, PostalCode, ReviewImage
+    )
 
 
 @admin.register(PostalCode)
@@ -10,9 +11,9 @@ class PostalCodeAdmin(admin.ModelAdmin):
 
 @admin.register(Business)
 class BusinessAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner', 'category', 'contact_number', 'email')
+    list_display = ('name', 'gstin', 'category', 'alt_email', 'alt_contact_number')
     list_filter = ('category', 'created_at')
-    search_fields = ('name', 'owner__username', 'contact_number')
+    search_fields = ('name', 'email', 'contact_number', 'gstin')
 
 
 @admin.register(BusinessAddress)
@@ -20,6 +21,12 @@ class BusinessAddressAdmin(admin.ModelAdmin):
     list_display = ('business', 'address_line1', 'city', 'state', 'postal_code', 'country')
     list_filter = ('city', 'state', 'country')
     search_fields = ('business__name', 'address_line1', 'city', 'state', 'postal_code', 'country')
+
+
+@admin.register(BusinessLogo)
+class BusinessLogoAdmin(admin.ModelAdmin):
+    list_display = ('business', 'logo')
+    search_fields = ('business__name',)
 
 
 @admin.register(BusinessImage)
@@ -36,7 +43,7 @@ class BusinessDocumentAdmin(admin.ModelAdmin):
 
 @admin.register(OwnerDocument)
 class OwnerDocumentAdmin(admin.ModelAdmin):
-    list_display = ('owner', 'document')
+    list_display = ('user', 'document')
     search_fields = ('owner__username',)
 
 
@@ -46,10 +53,10 @@ class AllergenAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
-@admin.register(Ingredient)
-class IngredientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'quantity', 'unit')
-    search_fields = ('name',)
+# @admin.register(Ingredient)
+# class IngredientAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'quantity', 'unit')
+#     search_fields = ('name',)
 
 
 @admin.register(Cuisine)
@@ -71,17 +78,23 @@ class ProductImageAdmin(admin.ModelAdmin):
     search_fields = ('product__name',)
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+@admin.register(ProductCategory)
+class ProductCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+
+@admin.register(ProductBrand)
+class ProductBrandAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
 
 @admin.register(ShopProduct)
 class ShopProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'business', 'brand', 'is_available')
+    list_display = ('name', 'business', 'is_available')
     list_filter = ('is_available', 'business')
-    search_fields = ('name', 'business__name', 'brand')
+    search_fields = ('name', 'business__name',)
 
 
 @admin.register(RestaurantProduct)
@@ -103,4 +116,10 @@ class ShopProductReviewAdmin(admin.ModelAdmin):
     list_display = ('product', 'user', 'rating', 'created_at')
     list_filter = ('product', 'rating', 'created_at')
     search_fields = ('product__name', 'user__username')
+
+
+@admin.register(ReviewImage)
+class ReviewImageAdmin(admin.ModelAdmin):
+    list_display = ('image',)
+    search_fields = ('user__username',)
 

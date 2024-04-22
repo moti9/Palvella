@@ -1,0 +1,159 @@
+{
+    "Cuisines": [
+        {
+            "id": 1,
+            "name": "indian",
+            "display_name": "Indian"
+        },
+        {
+            "id": 3,
+            "name": "chinese",
+            "display_name": "Chinese"
+        },
+        {
+            "id": 4,
+            "name": "italian",
+            "display_name": "Italian"
+        },
+        {
+            "id": 5,
+            "name": "mexican",
+            "display_name": "Mexican"
+        },
+        {
+            "id": 6,
+            "name": "japanese",
+            "display_name": "Japanese"
+        },
+        {
+            "id": 7,
+            "name": "american",
+            "display_name": "American"
+        },
+        {
+            "id": 8,
+            "name": "thai",
+            "display_name": "Thai"
+        },
+        {
+            "id": 9,
+            "name": "french",
+            "display_name": "French"
+        },
+        {
+            "id": 10,
+            "name": "spanish",
+            "display_name": "Spanish"
+        },
+        {
+            "id": 11,
+            "name": "greek",
+            "display_name": "Greek"
+        },
+        {
+            "id": 12,
+            "name": "korean",
+            "display_name": "Korean"
+        },
+        {
+            "id": 13,
+            "name": "vietnamese",
+            "display_name": "Vietnamese"
+        },
+        {
+            "id": 14,
+            "name": "german",
+            "display_name": "German"
+        },
+        {
+            "id": 15,
+            "name": "brazilian",
+            "display_name": "Brazilian"
+        },
+        {
+            "id": 16,
+            "name": "levantine",
+            "display_name": "Levantine"
+        },
+        {
+            "id": 17,
+            "name": "caribbean",
+            "display_name": "Caribbean"
+        },
+        {
+            "id": 18,
+            "name": "moroccan",
+            "display_name": "Moroccan"
+        },
+        {
+            "id": 19,
+            "name": "australian",
+            "display_name": "Australian"
+        },
+        {
+            "id": 20,
+            "name": "argentinian",
+            "display_name": "Argentinian"
+        },
+        {
+            "id": 21,
+            "name": "ethiopian",
+            "display_name": "Ethiopian"
+        },
+        {
+            "id": 22,
+            "name": "turkish",
+            "display_name": "Turkish"
+        },
+        {
+            "id": 23,
+            "name": "russian",
+            "display_name": "Russian"
+        },
+        {
+            "id": 24,
+            "name": "iranian",
+            "display_name": "Iranian"
+        },
+        {
+            "id": 25,
+            "name": "lebanese",
+            "display_name": "Lebanese"
+        },
+        {
+            "id": 26,
+            "name": "pakistani",
+            "display_name": "Pakistani"
+        },
+        {
+            "id": 27,
+            "name": "bangladeshi",
+            "display_name": "Bangladeshi"
+        },
+        {
+            "id": 28,
+            "name": "sri_lankan",
+            "display_name": "Sri Lankan"
+        },
+        {
+            "id": 29,
+            "name": "nepalese",
+            "display_name": "Nepalese"
+        },
+        {
+            "id": 30,
+            "name": "afghan",
+            "display_name": "Afghan"
+        },
+        {
+            "id": 31,
+            "name": "other",
+            "display_name": "Other"
+        },
+        {
+            "id": 32,
+            "name": "na",
+            "display_name": "Not Available"
+        }
+    ]
+}

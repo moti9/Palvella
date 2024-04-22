@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AuthAPI from '../services/AuthAPI';
 import AlertMessage from '../components/AlertMessage';
+import PropTypes from "prop-types";
 
 const UserSignup = ({ closeModal, loginModal }) => {
   const [user, setUser] = useState({
@@ -30,7 +31,7 @@ const UserSignup = ({ closeModal, loginModal }) => {
       setAlertMessage({ type: "error", message: "Password and confirm password should be same." });
       return;
     }
-    
+
     try {
       await AuthAPI.SignupUser(user);
       setAlertMessage({ type: "success", message: "Account created successfully." });
@@ -61,10 +62,10 @@ const UserSignup = ({ closeModal, loginModal }) => {
     });
   };
   return (
-    <div className="modal bg-dark" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: "block" }}>
+    <div className="modal bg-light" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: "block" }}>
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
-        {alertMessage && <AlertMessage type={alertMessage.type} message={alertMessage.message} setAlertMessage={setAlertMessage} />}
+          {alertMessage && <AlertMessage type={alertMessage.type} message={alertMessage.message} setAlertMessage={setAlertMessage} />}
           <div className="modal-header">
             <h5 className="modal-title">Signup</h5>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeModal}>
@@ -165,6 +166,11 @@ const UserSignup = ({ closeModal, loginModal }) => {
       </div>
     </div>
   );
+}
+
+UserSignup.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  loginModal: PropTypes.func.isRequired
 }
 
 export default UserSignup;

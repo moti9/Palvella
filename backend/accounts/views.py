@@ -63,6 +63,7 @@ class UserLoginView(APIView):
                     # 'profile': user_profile_serializer.data if user_profile_serializer else None,
                     'refresh_token': str(refresh),
                     'access_token': str(access_token),
+                    'role': str(user.role),
                 }
 
                 return Response(response_data, status=status.HTTP_200_OK)

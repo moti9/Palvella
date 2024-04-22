@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import User
 from merchants.models import Business, Product, ProductVariation
 import uuid
 # Create your models here.
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile_imgage = models.ImageField(default="", null=True, blank=True, upload_to="user_profile/")
     mob_number = models.CharField(max_length=15, default="", null=False, blank=False)
     mob_is_verified = models.BooleanField(default=False, null=False, blank=False)
@@ -16,7 +16,7 @@ class UserProfile(models.Model):
 
 
 class UserAddress(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     address_line1 = models.CharField(max_length=255, default="", null=False, blank=False)
     address_line2 = models.CharField(max_length=255, default="", blank=True, null=True)
     city = models.CharField(max_length=100)
@@ -47,6 +47,3 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"Order {self.order.id} - {self.product.name}"
-
-
-

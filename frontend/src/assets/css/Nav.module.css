@@ -18,6 +18,11 @@
   margin-right: 10px;
 }
 
+#dropdown-nav{
+  background-color: white;
+  color: aqua;
+}
+
 .signupBtn {
   background-color: black;
   color: white;
