@@ -75,19 +75,16 @@ const UserLogin = ({ closeModal, signupModal }) => {
                   required
                 />
               </div>
-              <div className="my-2">
-                <button type="submit" className="btn btn-sm btn-primary m-2">
+              <div className="my-3">
+                <button type="submit" className="btn btn-sm btn-primary me-2">
                   Submit
                 </button>
-                <button type="button" className="btn btn-sm btn-danger m-2" onClick={handleReset}>
+                <button type="button" className="btn btn-sm btn-danger me-2" onClick={handleReset}>
                   Reset
                 </button>
+                <button type='button' className="btn btn-sm btn-primary" onClick={signupModal}>Click here to signup</button>
               </div>
             </form>
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal" onClick={closeModal}>Close</button>
-            <button type='button' className="btn btn-sm btn-primary" onClick={signupModal}>Click here to signup</button>
           </div>
         </div>
       </div>

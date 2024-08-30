@@ -4,6 +4,7 @@
   overflow-x: hidden;
   transition: transform 1s ease-in-out;
   margin: 5rem 7rem;
+  flex-wrap: wrap;
 }
 
 .bg-black {

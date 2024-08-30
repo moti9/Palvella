@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import (Business, BusinessAddress, BusinessLogo, BusinessImage, BusinessDocument, OwnerDocument, ProductImage, ShopProduct, 
-        RestaurantProduct, Cuisine, Allergen, ProductVariation, PostalCode, ProductCategory, ProductBrand
+from merchants.models import (Business, BusinessAddress, BusinessLogo, BusinessImage, BusinessDocument, OwnerDocument, ProductImage, ShopProduct, 
+        RestaurantProduct, Cuisine, Allergen, ProductVariation, PostalCode, ProductCategory, ProductBrand, Product
     )
 from accounts.models import User
 from django.db import transaction
@@ -115,6 +115,12 @@ class BusinessLogoDetailSerializer(serializers.ModelSerializer):
                 'write_only': True,
             },
         }
+
+class BusinessLogoInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BusinessLogo
+        fields = ["logo"]
+
 
 '''
 Business image
@@ -266,6 +272,15 @@ class BusinessRegisterSerializer(serializers.ModelSerializer):
 Business Serializers - for listing only
 '''       
 
+class BusinessInfoSerializer(serializers.ModelSerializer):
+    logo = BusinessLogoInfoSerializer(source="businesslogo_set.first", read_only=True)
+
+    class Meta:
+        model = Business
+        # fields = "__all__"
+        fields = ('id', 'name', 'category', 'logo')
+
+
 class BusinessListSerializer(serializers.ModelSerializer):
     thumbnail = BusinessImageDetailSerializer(source="businessimage_set.first", read_only=True)
 
@@ -336,6 +351,13 @@ class ProductCategoryDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductCategory
         fields = "__all__"
+
+
+class ProductCategoryInfoSerializer(serializers.ModelSerializer):
+    display_name = serializers.CharField(source='get_name_display', read_only=True)
+    class Meta:
+        model = ProductCategory
+        fields = ["id", "name", "display_name", "image"]
 
 
 class ProductVariantDetailSerializer(serializers.ModelSerializer):
@@ -571,23 +593,78 @@ class RestaurantProductSerializer(serializers.ModelSerializer):
 Business Product Serializers - for listing only
 '''      
 
+# for listing only
+class ProductInfoSerializer(serializers.ModelSerializer):
+    # images = ProductImageDetailSerializer(source='productimage_set', many=True)
+    thumbnail = serializers.SerializerMethodField()
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'is_available', 'thumbnail')
+    
+    def get_thumbnail(self, obj):
+        first_image = obj.productimage_set.first()
+        if first_image:
+            request = self.context.get('request')
+            if request is not None:
+                return request.build_absolute_uri(first_image.image.url)
+        return None
 
 # for listing only
+class ProductListSerializer(serializers.ModelSerializer):
+    # images = ProductImageDetailSerializer(source='productimage_set', many=True)
+    thumbnail = serializers.SerializerMethodField()
+    class Meta:
+        model = Product
+        fields = ('id', 'business', 'name', 'product_code', 'is_available', 'thumbnail')
+    
+    def get_thumbnail(self, obj):
+        first_image = obj.productimage_set.first()
+        if first_image:
+            request = self.context.get('request')
+            if request is not None:
+                return request.build_absolute_uri(first_image.image.url)
+        return None
+    
+
 class ShopProductListSerializer(serializers.ModelSerializer):
+    # images = ProductImageDetailSerializer(source='productimage_set', many=True)
+    thumbnail = serializers.SerializerMethodField()
     class Meta:
         model = ShopProduct
-        fields = "__all__"
-
-
+        fields = ('id', 'business', 'name', 'product_code', 'is_available', 'thumbnail')
+    
+    def get_thumbnail(self, obj):
+        first_image = obj.productimage_set.first()
+        if first_image:
+            request = self.context.get('request')
+            if request is not None:
+                return request.build_absolute_uri(first_image.image.url)
+        return None
+    
+    
 # for listing only
 class RestaurantProductListSerializer(serializers.ModelSerializer):
+    # cuisines = CuisineListSerializer(many=True)
+    # allergens = AllergenListSerializer(many=True)
+    # product_variant = ProductVariantDetailSerializer(many=True)
+    # images = ProductImageDetailSerializer(source='productimage_set', many=True)
+    thumbnail = serializers.SerializerMethodField()
     class Meta:
         model = RestaurantProduct
-        fields = "__all__"
+        fields = ('id', 'business',  'name', 'product_code', 'is_available', 'thumbnail')
+        # fields = "__all__"
+
+    def get_thumbnail(self, obj):
+        first_image = obj.productimage_set.first()
+        if first_image:
+            request = self.context.get('request')
+            if request is not None:
+                return request.build_absolute_uri(first_image.image.url)
+        return None
 
 # for detailed info
 class ShopProductDetailSerializer(serializers.ModelSerializer):
-    images = ProductImageDetailSerializer(source='productimage_set', many=True)
+    images = ProductImageDetailSerializer(source='productimage_set')
     product_variant = ProductVariantDetailSerializer(many=True)
 
     class Meta:
@@ -598,17 +675,35 @@ class ShopProductDetailSerializer(serializers.ModelSerializer):
 
 # for detailed info
 class RestaurantProductDetailSerializer(serializers.ModelSerializer):
-    images = ProductImageDetailSerializer(many=True, read_only=True)
+    # images = ProductImageDetailSerializer(many=True, read_only=True)
     cuisines = CuisineDetailSerializer(many=True)
     allergens = AllergenDetailSerializer(many=True)
     product_variant = ProductVariantDetailSerializer(many=True)
-    images = ProductImageDetailSerializer(source='productimage_set', many=True)
+    images = ProductImageDetailSerializer(source='productimage_set')
 
 
     class Meta:
         model = RestaurantProduct
         # fields = "__all__"
-        fields = ('id', 'business',  'name', 'product_code', 'product_variant', 'description', 'meta_data', 'is_available', 'cuisines', 'ingredients', 'allergens', 'preparation_time', 'available_from', 'available_until', 'images')
+        fields = ('id', 'business',  'name', 'product_code', 'product_variant', 'description', 'meta_data', 'is_available', 'cuisines', 'allergens', 'preparation_time', 'available_from', 'available_until', 'images')
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'image')
+
+    def get_image(self, obj):
+        # Get the first image of the product
+        product_image = ProductImage.objects.filter(product=obj, is_trashed=False).first()
+        if product_image:
+            request = self.context.get('request')
+            if request is not None:
+                return request.build_absolute_uri(product_image.image.url)
+        return None
+
 
 
 '''
@@ -621,7 +716,7 @@ class ProductContentSerializer(serializers.Serializer):
         ("meta_data_or_more_info", "Meta data"),
     )
 
-    name = serializers.CharField(max_length=100, required=True)
+    name = serializers.CharField(max_length=255, required=True)
     product_code = serializers.CharField(max_length=25, required=True)
     categories = serializers.ListField(child=serializers.CharField(), required=True)
     content_type = serializers.ChoiceField(choices=CONTENT_CHOICE)
@@ -662,7 +757,7 @@ class RestaurantProductContentSerializer(ProductContentSerializer):
                 raise ValueError("Please provide accurate data")
             cuisines = ", ".join(cuisines_all)
             allergens = ", ".join(allergens_all)
-            prompt = f"Generate a {content_type} in human tone(in text format without any styling like markdown styles etc and with multiple appropriate paragraphs) for the restaurant product: {name} with product code: {product_code} for cuisines: {cuisines} and allergens: {allergens}.:"
+            prompt = f"Generate a {content_type} in human tone(in text format without any styling like markdown styles(like * or anything else) etc and with multiple appropriate paragraphs) for the restaurant product: {name} with product code: {product_code} for cuisines: {cuisines} and allergens: {allergens}.:"
             return prompt
         except Exception as e:
             raise serializers.ValidationError(str(e))
@@ -687,7 +782,7 @@ class BusinessContentSerializer(serializers.Serializer):
             if len(service_available_at_all) == 0:
                 raise ValueError("Please provide accurate data")
             service_available_at = ", ".join(service_available_at_all)
-            prompt = f"Generate a detailed description(in text format without any styling like markdown styles etc and with multiple appropriate paragraphs) for the {category} '{name}' with GSTIN: {gstin} in human tone where the '{name}' provide services at the following postals like {service_available_at}. Description:"
+            prompt = f"Generate a detailed description(in text format without any styling like markdown styles(like * or anything else) etc and with multiple appropriate paragraphs) for the {category} '{name}' with GSTIN: {gstin} in human tone where the '{name}' provide services at the following postals like {service_available_at}. Description:"
 
             return prompt
         except Exception as e:

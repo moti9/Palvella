@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 from .models import Business, BusinessAddress, BusinessImage, BusinessDocument, OwnerDocument
-from .serializers import BusinessRegisterSerializer
+from .serializers.request import BusinessRegisterSerializer
 
 class BusinessRegisterSerializerTestCase(TestCase):
     def setUp(self):

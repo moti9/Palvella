@@ -50,7 +50,7 @@ const TopBusinessList = () => {
         <Carousel.Item>
           <div className={`card-container ${styles.cardContainer}`}>
             {logos.slice(index, index + 4).map((logo, i) => (
-              <Card key={index + i} style={{ width: '18rem', position: 'relative' }}>
+              <Card key={index + i} style={{ width: '18rem' }} className='my-2'>
                 <Card.Img variant="top" src={logo} />
               </Card>
             ))}

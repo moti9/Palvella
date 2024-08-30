@@ -3,9 +3,9 @@ import { Form, Button, Container, Dropdown } from 'react-bootstrap';
 import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa';
 import AlertMessage from '../components/AlertMessage';
 import BusinessAPI from '../services/BusinessAPI';
-import { Categories } from "../services/Categories.json";
-import { Cuisines } from "../services/Cuisines.json";
-import { Allergens } from "../services/Allergens.json";
+// import { Categories } from "../services/Categories.json";
+// import { Cuisines } from "../services/Cuisines.json";
+// import { Allergens } from "../services/Allergens.json";
 
 
 const RestaurantProduct = () => {
@@ -49,9 +49,9 @@ const RestaurantProduct = () => {
 
     const fetchAllCategories = async () => {
         try {
-            // const response = await BusinessAPI.getAllCategories();
-            // setAllCategories(response);
-            setAllCategories(Categories);
+            const response = await BusinessAPI.getAllCategories();
+            setAllCategories(response);
+            // setAllCategories(Categories);
 
         } catch (error) {
             console.log(error.message);
@@ -60,9 +60,9 @@ const RestaurantProduct = () => {
 
     const fetchAllCuisines = async () => {
         try {
-            // const response = await BusinessAPI.getAllCuisines();
-            // setAllCuisines(response);
-            setAllCuisines(Cuisines);
+            const response = await BusinessAPI.getAllCuisines();
+            setAllCuisines(response);
+            // setAllCuisines(Cuisines);
         } catch (error) {
             console.log(error.message);
         }
@@ -70,9 +70,9 @@ const RestaurantProduct = () => {
 
     const fetchAllAllergens = async () => {
         try {
-            // const response = await BusinessAPI.getAllAllergens();
-            // setAllAllergens(response);
-            setAllAllergens(Allergens);
+            const response = await BusinessAPI.getAllAllergens();
+            setAllAllergens(response);
+            // setAllAllergens(Allergens);
         } catch (error) {
             console.log(error.message);
         }

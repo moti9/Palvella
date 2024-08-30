@@ -1,84 +1,58 @@
+import { Container, Row, Col, Image } from 'react-bootstrap';
+import brand from "../assets/images/brand.png";
 
 const About = () => {
     return (
-        <div className='container'>
-            <div className="accordion" id="accordionExample">
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Accordion Item #1
-                        </button>
-                    </h2>
-                    <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <strong>This is the first item&apos;s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It&apos;s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Accordion Item #2
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <strong>This is the second item&apos;s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It&apos;s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Accordion Item #3
-                        </button>
-                    </h2>
-                    <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <strong>This is the third item&apos;s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It&apos;s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <nav id="navbar-example2" className="navbar bg-body-tertiary px-3 mb-3">
-                <a className="navbar-brand" href="/">Navbar</a>
-                <ul className="nav nav-pills">
-                    <li className="nav-item">
-                        <a className="nav-link" href="#scrollspyHeading1">First</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#scrollspyHeading2">Second</a>
-                    </li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/" role="button" aria-expanded="false">Dropdown</a>
-                        <ul className="dropdown-menu">
-                            <li><a className="dropdown-item" href="#scrollspyHeading3">Third</a></li>
-                            <li><a className="dropdown-item" href="#scrollspyHeading4">Fourth</a></li>
-                            <li><hr className="dropdown-divider" /></li>
-                            <li><a className="dropdown-item" href="#scrollspyHeading5">Fifth</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" className="scrollspy-example bg-body-tertiary p-3 rounded-2" tabIndex="0">
-                <h4 id="scrollspyHeading1">First heading</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minima itaque adipisci veritatis rerum nobis necessitatibus ipsum ut mollitia soluta. Omnis neque voluptate rem soluta exercitationem veritatis ex architecto ratione.</p>
-                <h4 id="scrollspyHeading2">Second heading</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minima itaque adipisci veritatis rerum nobis necessitatibus ipsum ut mollitia soluta. Omnis neque voluptate rem soluta exercitationem veritatis ex architecto ratione.</p>
-                <p>...</p>
-                <h4 id="scrollspyHeading3">Third heading</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minima itaque adipisci veritatis rerum nobis necessitatibus ipsum ut mollitia soluta. Omnis neque voluptate rem soluta exercitationem veritatis ex architecto ratione.</p>
-                <p>...</p>
-                <h4 id="scrollspyHeading4">Fourth heading</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minima itaque adipisci veritatis rerum nobis necessitatibus ipsum ut mollitia soluta. Omnis neque voluptate rem soluta exercitationem veritatis ex architecto ratione.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minima itaque adipisci veritatis rerum nobis necessitatibus ipsum ut mollitia soluta. Omnis neque voluptate rem soluta exercitationem veritatis ex architecto ratione.</p>
-                <p>...</p>
-                <h4 id="scrollspyHeading5">Fifth heading</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minima itaque adipisci veritatis rerum nobis necessitatibus ipsum ut mollitia soluta. Omnis neque voluptate rem soluta exercitationem veritatis ex architecto ratione.</p>
-                <p>...</p>
-            </div>
-        </div>
-    )
+        <Container>
+            <Row className="mt-5">
+                <Col>
+                    <Image src={brand} alt="Palvella Logo" fluid />
+                </Col>
+            </Row>
+            <Row className="mt-5">
+                <Col>
+                    <h2>Our Mission</h2>
+                    <p>At Palvella, our mission is clear: to make online shopping effortless for customers while empowering local businesses to thrive in the digital age...</p>
+                </Col>
+            </Row>
+            <Row className="mt-5">
+                <Col>
+                    <h2>How Palvella Works</h2>
+                    <p>Palvella is more than just a platform - it&apos;s a gateway to convenience and connectivity. With our user-friendly interface, customers can effortlessly browse through a diverse array of products, place orders, and make secure payments...</p>
+                </Col>
+            </Row>
+            <Row className="mt-5">
+                <Col>
+                    <h2>Our Technological Backbone</h2>
+                    <p>Behind the scenes, Palvella is powered by cutting-edge technology meticulously crafted to deliver a seamless experience. Our frontend is built using React and Redux, ensuring a dynamic and responsive user interface. On the backend, we leverage the robust capabilities of Django, coupled with Django REST Framework and Django Channels for real-time updates. With Postgresql as our trusted database, we&apos;ve constructed a platform that&apos;s not only robust but also infinitely scalable...</p>
+                </Col>
+            </Row>
+            <Row className="mt-5">
+                <Col>
+                    <h2>Overcoming Challenges, Celebrating Successes</h2>
+                    <p>Throughout our journey, we&apos;ve encountered challenges that tested our resolve and ingenuity. From navigating the complexities of real-time updates to fine-tuning our platform for optimal performance, every obstacle has been met with perseverance and innovation. Yet, amidst the challenges, there have been triumphs worth celebrating. We take pride in the positive impact Palvella has had on our community, empowering local businesses to thrive in an ever-evolving digital landscape...</p>
+                </Col>
+            </Row>
+            <Row className="mt-5">
+                <Col>
+                    <h2>Continuous Learning and Growth</h2>
+                    <p>The development of Palvella has been a journey of continuous learning and growth. With each hurdle we&apos;ve overcome, we&apos;ve gleaned invaluable insights into building scalable web applications, managing complex state with Redux, and harnessing the power of technology to drive positive change. Moreover, our journey has deepened our understanding of the unique challenges faced by local businesses, fueling our commitment to innovation and excellence...</p>
+                </Col>
+            </Row>
+            <Row className="mt-5">
+                <Col>
+                    <h2>The Future of Palvella</h2>
+                    <p>As we look ahead, the future of Palvella brims with promise and possibility. We&apos;re committed to ongoing improvement, fueled by the invaluable feedback of our users. In the days to come, we plan to enrich our platform with new features and functionalities, enhancing the overall experience for both customers and businesses alike. Additionally, we&apos;re exploring exciting partnerships with local delivery services to offer expanded delivery options, further elevating the convenience of Palvella. Ultimately, our vision is simple yet ambitious: to make Palvella the premier destination for local online shopping, enriching communities and empowering businesses every step of the way...</p>
+                </Col>
+            </Row>
+            <Row className="mt-5">
+                <Col>
+                    <h2>Join Us on Our Journey</h2>
+                    <p>Join us on our journey as we revolutionize the way communities connect and thrive. Whether you&apos;re a customer seeking convenience or a business striving for success, Palvella welcomes you with open arms. Together, let&apos;s build a brighter future where local businesses flourish and communities thrive. Welcome to Palvella – your gateway to local online shopping reimagined...</p>
+                </Col>
+            </Row>
+        </Container>
+    );
 }
 
 export default About;

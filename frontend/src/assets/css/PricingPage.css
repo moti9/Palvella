@@ -1,0 +1,33 @@
+/* PricingPage.css */
+.hero-section-pricing {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hero-pricing-bg.png') no-repeat center center;
+    background-size: cover;
+    padding: 100px 0;
+  }
+  
+  .pricing-card {
+    transition: transform 0.3s ease;
+  }
+  
+  .pricing-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .pricing-card-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .pricing-card ul {
+    font-size: 1.1rem;
+  }
+  
+  .footer {
+    text-align: center;
+  }
+  
+  .bi-check-circle-fill {
+    color: green;
+    margin-right: 10px;
+  }
+  

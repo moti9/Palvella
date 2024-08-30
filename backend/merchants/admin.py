@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Business, BusinessAddress, BusinessLogo, BusinessImage, BusinessDocument, OwnerDocument, Allergen,
+from merchants.models import (Business, BusinessAddress, BusinessLogo, BusinessImage, BusinessDocument, OwnerDocument, Allergen,
         Cuisine, ProductVariation, ProductImage, ProductCategory, ProductBrand ,ShopProduct, RestaurantProduct, BusinessReview, 
         ProductReview, PostalCode, ReviewImage
     )

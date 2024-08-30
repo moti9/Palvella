@@ -57,19 +57,18 @@ const MainNavbar = () => {
   return (
 
     <>
-      <div className={styles.containerNav}>
+      <div className={`sticky-top ${styles.containerNav}`}>
         <div className={`d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start ${styles.navContainer}`}>
           <NavLink to="/" className={`d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none ${styles.logo}`}>
             <img src={brand} alt="Brand Logo" width="90" height="25" className="me-3" />
           </NavLink>
 
           <ul className={`nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 ${styles.navList}`}>
-            <li><NavLink to="/home" className={`navLink px-2 ${styles.navLink}`}>Home</NavLink></li>
+            <li><NavLink to="/about" className={`navLink px-2 ${styles.navLink}`}>About</NavLink></li>
             <li><NavLink to="/features" className={`navLink px-2 ${styles.navLink}`}>Features</NavLink></li>
             <li><NavLink to="/pricing" className={`navLink px-2 ${styles.navLink}`}>Pricing</NavLink></li>
-            <li><NavLink to="/faq" className={`navLink px-2 ${styles.navLink}`}>FAQs</NavLink></li>
-            <li><NavLink to="/about" className={`navLink px-2 ${styles.navLink}`}>About</NavLink></li>
-            <li><NavLink to="/m" className={`navLink px-2 ${styles.navLink}`}>Business</NavLink></li>
+            {/* <li><NavLink to="/faq" className={`navLink px-2 ${styles.navLink}`}>FAQs</NavLink></li> */}
+            {/* <li><NavLink to="/b" className={`navLink px-2 ${styles.navLink}`}>Business</NavLink></li> */}
           </ul>
 
           <form className={`col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ${styles.searchForm}`} role="search">

@@ -17,7 +17,7 @@ const OrderHistory = () => {
                 <div className="row">
                     <div className="col">
                         <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
+                            <ol className="breadcrumb">
                                 <li className="breadcrumb-item">
                                     <a href="#">My Account</a>
                                 </li>
@@ -35,7 +35,7 @@ const OrderHistory = () => {
                 </div>
                 <div className="row">
                     <div className="col table-responsive">
-                        <table class="table table-striped table-borderless">
+                        <table className="table table-striped table-borderless">
                             <thead>
                                 <tr>
                                     <th scope="col">Order Date</th>

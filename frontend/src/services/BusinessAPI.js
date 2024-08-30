@@ -118,6 +118,10 @@ class BusinessAPI {
         return sendRequest('category-detail', 'get', null, false, false);
     }
 
+    static async getAllCategoryInfo() {
+        return sendRequest('category-info', 'get', null, false, false);
+    }
+
     static async getAllCuisines() {
         return sendRequest('cuisines', 'get', null, false, false);
     }
@@ -138,13 +142,21 @@ class BusinessAPI {
         return sendRequest('create-restaurant-product', 'post', body, true);
     }
 
-    // static async getAllShopProduct() {
-    //     return sendRequest('create-shop-product', 'get');
-    // }
+    static async getAllProducts() {
+        return sendRequest('get-products', 'get');
+    }
 
-    // static async getAllRestaurantProduct() {
-    //     return sendRequest('create-restaurant-product/', 'get');
-    // }
+    static async getTopProducts() {
+        return sendRequest('top-products', 'get', null, false, false);
+    }
+
+    static async getBusinessList() {
+        return sendRequest('businesses', 'get', null, false, false);
+    }
+
+    static async getProductList() {
+        return sendRequest('products', 'get', null, false, false);
+    }
 }
 
 export default BusinessAPI;

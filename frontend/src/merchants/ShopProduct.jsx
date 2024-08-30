@@ -3,7 +3,7 @@ import { Form, Button, Container, Row, Col, Dropdown } from 'react-bootstrap';
 import { FaMinusCircle, FaPlusCircle } from "react-icons/fa";
 import AlertMessage from "../components/AlertMessage";
 import BusinessAPI from "../services/BusinessAPI";
-import { Categories } from "../services/Categories.json";
+// import { Categories } from "../services/Categories.json";
 
 const ShopProduct = () => {
     const [formData, setFormData] = useState({
@@ -58,9 +58,9 @@ const ShopProduct = () => {
 
     const fetchAllCategories = async () => {
         try {
-            // const response = await BusinessAPI.getAllCategories();
-            // setCategories(response);
-            setAllCategories(Categories);
+            const response = await BusinessAPI.getAllCategories();
+            setAllCategories(response);
+            // setAllCategories(Categories);
 
         } catch (error) {
             console.log(error.message);

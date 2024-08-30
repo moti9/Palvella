@@ -1,0 +1,84 @@
+{
+    "PostalCode": [
+        {
+            "id": 1,
+            "postal_code": "110001"
+        },
+        {
+            "id": 2,
+            "postal_code": "400001"
+        },
+        {
+            "id": 3,
+            "postal_code": "700001"
+        },
+        {
+            "id": 4,
+            "postal_code": "600001"
+        },
+        {
+            "id": 5,
+            "postal_code": "560001"
+        },
+        {
+            "id": 6,
+            "postal_code": "500001"
+        },
+        {
+            "id": 7,
+            "postal_code": "380001"
+        },
+        {
+            "id": 8,
+            "postal_code": "411001"
+        },
+        {
+            "id": 9,
+            "postal_code": "141001"
+        },
+        {
+            "id": 10,
+            "postal_code": "160001"
+        },
+        {
+            "id": 11,
+            "postal_code": "110011"
+        },
+        {
+            "id": 12,
+            "postal_code": "110002"
+        },
+        {
+            "id": 13,
+            "postal_code": "110003"
+        },
+        {
+            "id": 14,
+            "postal_code": "110004"
+        },
+        {
+            "id": 15,
+            "postal_code": "110005"
+        },
+        {
+            "id": 16,
+            "postal_code": "110006"
+        },
+        {
+            "id": 17,
+            "postal_code": "110007"
+        },
+        {
+            "id": 18,
+            "postal_code": "110008"
+        },
+        {
+            "id": 19,
+            "postal_code": "110009"
+        },
+        {
+            "id": 20,
+            "postal_code": "110010"
+        }
+    ]
+}

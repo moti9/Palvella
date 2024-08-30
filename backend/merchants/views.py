@@ -11,13 +11,14 @@ from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
 # Import from others
 # from django.shortcuts import render
 from .models import (Business, BusinessAddress, BusinessLogo, BusinessImage, BusinessDocument, OwnerDocument, ShopProduct, RestaurantProduct, Allergen,
-        Cuisine, ProductCategory
+        Cuisine, ProductCategory, Product,
     )
-from .serializers import (BusinessRegisterSerializer, BusinessSignupSerializer, BusinessListSerializer, BusinessDetailSerializer, ShopProductDetailSerializer, 
+from merchants.serializers import (BusinessRegisterSerializer, BusinessSignupSerializer, BusinessListSerializer, BusinessDetailSerializer, ShopProductDetailSerializer, 
         RestaurantProductDetailSerializer, ShopProductListSerializer, RestaurantProductListSerializer, BusinessLoginSerializer, BusinessAddressDetailSerializer, 
         BusinessLogoDetailSerializer, BusinessImageDetailSerializer, BusinessDocumentDetailSerializer, BusinessOwnerDocumentDetailSerializer, ShopProductContentSerializer, 
         RestaurantProductContentSerializer, BusinessContentSerializer, CuisineListSerializer, AllergenListSerializer, ProductCategoryListSerializer, ShopProductSerializer,
-        RestaurantProductSerializer, ProductCategoryDetailSerializer, CuisineDetailSerializer, AllergenDetailSerializer, ProductImageSerializer
+        RestaurantProductSerializer, ProductCategoryDetailSerializer, CuisineDetailSerializer, AllergenDetailSerializer, ProductImageSerializer, ProductSerializer,
+        ProductCategoryInfoSerializer, ProductListSerializer, BusinessInfoSerializer, ProductInfoSerializer
     )
 # Custom import
 import google.generativeai as genai
@@ -326,8 +327,8 @@ class BusinessOwnerDocumentView(APIView):
 Business list and retrieve
 '''
 
-class BusinessListView(generics.ListAPIView):
-    serializer_class = BusinessListSerializer
+class BusinessInfoView(generics.ListAPIView):
+    serializer_class = BusinessInfoSerializer
 
     def get_queryset(self):
         queryset = Business.objects.all()
@@ -351,7 +352,29 @@ class BusinessDetailsView(generics.RetrieveAPIView):
     serializer_class = BusinessDetailSerializer
 
 
+
 # for listing
+class ProductInfoView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductInfoSerializer
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        name = self.request.query_params.get('name')
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset.order_by('created_at')
+
+class ProductListView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductListSerializer
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        name = self.request.query_params.get('name')
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset.order_by('created_at')
+
+
 class ShopProductListView(generics.ListAPIView):
     queryset = ShopProduct.objects.all()
     serializer_class = ShopProductListSerializer
@@ -394,6 +417,11 @@ Get list of cuisines and allergens
 class ProductCategoryListView(generics.ListAPIView):
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategoryListSerializer
+
+
+class ProductCategoryInfoView(generics.ListAPIView):
+    queryset = ProductCategory.objects.all()
+    serializer_class = ProductCategoryInfoSerializer
 
 
 class CuisineListView(generics.ListAPIView):
@@ -522,6 +550,35 @@ class RestaurantProductView(APIView):
 
     def get_serializer(self):
         return RestaurantProductSerializer()
+    
+
+class ProductOwnerListView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def get_queryset(self):
+        business = Business.objects.get(user=self.request.user)
+        if business.category == Business.BusinessCategory.SHOP:
+            return ShopProduct.objects.filter(business=business).order_by("-updated_at")
+        elif business.category == Business.BusinessCategory.RESTAURANT:
+            return RestaurantProduct.objects.filter(business=business).order_by("-updated_at")
+        else:
+            return None
+
+    def get_serializer_class(self):
+        business = Business.objects.get(user=self.request.user)
+        if business.category == Business.BusinessCategory.SHOP:
+            return ShopProductListSerializer
+        elif business.category == Business.BusinessCategory.RESTAURANT:
+            return RestaurantProductListSerializer
+        
+
+class TopProductsListView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    def get_queryset(self):
+        # Get top 3 products based on views
+        top_products = Product.objects.filter(is_trashed=False).order_by('-updated_at')[:5]
+        return top_products
 
 '''
 Here we'll implement the openai data generating methods- start
@@ -553,6 +610,7 @@ class GenerateShopProductContentView(APIView):
             content = generateContent(prompt)
             return Response({"content": content}, status=status.HTTP_200_OK)
         except Exception as e:
+            print(e)
             return Response({"message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 

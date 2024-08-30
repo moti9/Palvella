@@ -199,8 +199,14 @@ class ProductCategory(models.Model):
         VIDEO_GAMES = "video_games", "Video Games"
         FURNITURE = "furniture", "Furniture"
         OFFICE_SUPPLIES = "office_supplies", "Office Supplies"
+        DESSERTS = "desserts", "Desserts"
+        SNACKS = "snacks", "Snacks"
+        SPICES = "spices", "Spices"
+        READYTOEAT = "ready_to_eat", "Ready To Eat"
+        VEGETERIAN = "vegeterian", "Vegeterian"
+        NONVEGETERIAN = "non_vegeterian", "Non Vegeterian"
         OTHER = "other", "Other"
-        NA = "na", "Not Available"
+        # NA = "na", "Not Available"
 
     name = models.CharField(max_length=20, choices=Category.choices, default=Category.OTHER)
     description = models.TextField(max_length=2000, default="")
@@ -229,6 +235,7 @@ class ProductVariation(models.Model):
         HALF = "half", "Half"
         FULL = "full", "Full"
         OTHER = "other", "Other"
+        QUANTITY = "quantity", "Quantity"
         NA = "na", "Not Available"
 
     class Currency(models.TextChoices):
@@ -275,7 +282,7 @@ class ProductImage(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="product_images/", validators=[FileExtensionValidator(['jpg', 'jpeg', 'png']), validate_image_dimensions])
+    image = models.ImageField(upload_to="product_images/", default="default.png", validators=[FileExtensionValidator(['jpg', 'jpeg', 'png']), validate_image_dimensions])
     is_trashed = models.BooleanField(default=False)    
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
@@ -330,6 +337,8 @@ class Cuisine(models.Model):
         SRI_LANKAN = "sri_lankan", "Sri Lankan"
         NEPALESE = "nepalese", "Nepalese"
         AFGHAN = "afghan", "Afghan"
+        VARIOUS = "various", "Various"
+        INTERNATIONAL = "international", "International"
         OTHER = "other", "Other"
         NA = "na", "Not Available"
         # Add more cuisines here...

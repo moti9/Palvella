@@ -49,7 +49,7 @@ const BusinessLogin = () => {
     useEffect(() => {
         if (isAuthenticated) {
             setAlertMessage({ type: "primary", message: "You're already loggedin." });
-            window.location.href = "/m";
+            window.location.href = "/b";
         }
     }, [isAuthenticated]);
 
